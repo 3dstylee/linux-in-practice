@@ -1,0 +1,23 @@
+ldd /bin/echo
+	linux-vdso.so.1 (0xbed8f000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so => /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so (0xb6f96000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0xb6e35000)
+	/lib/ld-linux-armhf.so.3 (0xb6fab000)
+ldd ppidloop
+	linux-vdso.so.1 (0xbedc5000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so => /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so (0xb6f2a000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0xb6dc9000)
+	/lib/ld-linux-armhf.so.3 (0xb6f3f000)
+ldd /usr/bin/python3
+	linux-vdso.so.1 (0xbeb97000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so => /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so (0xb6fb2000)
+	libcrypt.so.1 => /lib/arm-linux-gnueabihf/libcrypt.so.1 (0xb6f5f000)
+	libpthread.so.0 => /lib/arm-linux-gnueabihf/libpthread.so.0 (0xb6f35000)
+	libdl.so.2 => /lib/arm-linux-gnueabihf/libdl.so.2 (0xb6f22000)
+	libutil.so.1 => /lib/arm-linux-gnueabihf/libutil.so.1 (0xb6f0f000)
+	libexpat.so.1 => /lib/arm-linux-gnueabihf/libexpat.so.1 (0xb6ece000)
+	libz.so.1 => /lib/arm-linux-gnueabihf/libz.so.1 (0xb6ea3000)
+	libm.so.6 => /lib/arm-linux-gnueabihf/libm.so.6 (0xb6e21000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0xb6cd3000)
+	/lib/ld-linux-armhf.so.3 (0xb6fc7000)
+	libgcc_s.so.1 => /lib/arm-linux-gnueabihf/libgcc_s.so.1 (0xb6ca6000)
