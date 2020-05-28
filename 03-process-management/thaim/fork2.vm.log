@@ -1,0 +1,2 @@
+I'm child! my pid is 3181 and the pid of my parent is 3179.
+I'm parent! my pid is 3179 and the pid of my child is 3181.
