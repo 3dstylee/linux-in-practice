@@ -13,7 +13,7 @@ build: ## build binary package
 	$(CC) -o sched_nice    sched_nice.c
 
 eval: build ## run strace
-	mkdir -p log result
+	mkdir -p log
 
 	taskset -c 0 ./sched 1 100 1 | tee log/sched4A.log
 	taskset -c 0 ./sched 2 100 1 | tee log/sched4B.log

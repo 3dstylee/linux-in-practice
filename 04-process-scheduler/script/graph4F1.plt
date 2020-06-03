@@ -1,5 +1,5 @@
 set terminal png font "Meiryo,12" enhanced
-set output "result/sched4F1.png"
+set output "log/sched4F1.png"
 # set xrange [ 0 : 100 ] noreverse nowriteback
 set yrange [ 0 : 3 ]   noreverse nowriteback
 set ytics 1
