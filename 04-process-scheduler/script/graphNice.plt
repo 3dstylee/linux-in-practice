@@ -1,5 +1,5 @@
 ##
-set terminal png font "Meiryo,12" enhanced
+set terminal png font "TakaoGothic,12" enhanced
 set output "log/schedNice1.png"
 # set xrange [ 0 : 100 ] noreverse nowriteback
 set yrange [ 0 : 3 ]   noreverse nowriteback
@@ -14,7 +14,7 @@ plot '< sed -n 1,100p log/schedNice.log' using 2:1, \
      '< sed -n 101,200p log/schedNice.log' using 2:1
 
 
-set terminal png font "Meiryo,12" enhanced
+set terminal png font "TakaoGothic,12" enhanced
 set output "log/schedNice2.png"
 # set xrange [ 0 : 100 ] noreverse nowriteback
 set yrange [ 0 : 100 ]   noreverse nowriteback

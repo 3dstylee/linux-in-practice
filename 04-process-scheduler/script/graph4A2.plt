@@ -1,4 +1,4 @@
-set terminal png font "Meiryo,12" enhanced
+set terminal png font "TakaoGothic,12" enhanced
 set output "log/sched4A2.png"
 # set xrange [ 0 : 100 ] noreverse nowriteback
 set yrange [ 0 : 100 ]   noreverse nowriteback
