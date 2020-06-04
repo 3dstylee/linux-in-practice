@@ -1,0 +1,200 @@
+process count
+152
+
+process list
+  PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:12 /sbin/init maybe-ubiquity
+    2 ?        S      0:00 [kthreadd]
+    4 ?        I<     0:00 [kworker/0:0H]
+    6 ?        I<     0:00 [mm_percpu_wq]
+    7 ?        S      0:01 [ksoftirqd/0]
+    8 ?        I      0:54 [rcu_sched]
+    9 ?        I      0:00 [rcu_bh]
+   10 ?        S      0:00 [migration/0]
+   11 ?        S      0:01 [watchdog/0]
+   12 ?        S      0:00 [cpuhp/0]
+   13 ?        S      0:00 [cpuhp/1]
+   14 ?        S      0:01 [watchdog/1]
+   15 ?        S      0:00 [migration/1]
+   16 ?        S      0:01 [ksoftirqd/1]
+   18 ?        I<     0:00 [kworker/1:0H]
+   19 ?        S      0:00 [kdevtmpfs]
+   20 ?        I<     0:00 [netns]
+   21 ?        S      0:00 [rcu_tasks_kthre]
+   22 ?        S      0:00 [kauditd]
+   24 ?        S      0:00 [khungtaskd]
+   25 ?        S      0:00 [oom_reaper]
+   26 ?        I<     0:00 [writeback]
+   27 ?        S      0:00 [kcompactd0]
+   28 ?        SN     0:00 [ksmd]
+   29 ?        SN     0:02 [khugepaged]
+   30 ?        I<     0:00 [crypto]
+   31 ?        I<     0:00 [kintegrityd]
+   32 ?        I<     0:00 [kblockd]
+   33 ?        I<     0:00 [ata_sff]
+   34 ?        I<     0:00 [md]
+   35 ?        I<     0:00 [edac-poller]
+   36 ?        I<     0:00 [devfreq_wq]
+   37 ?        I<     0:00 [watchdogd]
+   40 ?        S      3:32 [kswapd0]
+   41 ?        I<     0:00 [kworker/u5:0]
+   42 ?        S      0:00 [ecryptfs-kthrea]
+   85 ?        I<     0:00 [kthrotld]
+   86 ?        I<     0:00 [acpi_thermal_pm]
+   87 ?        S      0:00 [scsi_eh_0]
+   88 ?        I<     0:00 [scsi_tmf_0]
+   89 ?        S      0:00 [scsi_eh_1]
+   90 ?        I<     0:00 [scsi_tmf_1]
+   96 ?        I<     0:00 [ipv6_addrconf]
+  105 ?        I<     0:00 [kstrp]
+  122 ?        I<     0:00 [charger_manager]
+  199 ?        I<     0:00 [ttm_swap]
+  274 ?        I<     0:00 [raid5wq]
+  320 ?        S      0:03 [jbd2/vda2-8]
+  321 ?        I<     0:00 [ext4-rsv-conver]
+  371 ?        I<     0:02 [kworker/0:1H]
+  379 ?        I<     0:01 [kworker/1:1H]
+  392 ?        I<     0:00 [iscsi_eh]
+  399 ?        S<s    0:17 /lib/systemd/systemd-journald
+  406 ?        I<     0:00 [ib-comp-wq]
+  407 ?        I<     0:00 [ib-comp-unb-wq]
+  408 ?        I<     0:00 [ib_mcast]
+  409 ?        I<     0:00 [ib_nl_sa_wq]
+  415 ?        I<     0:00 [rpciod]
+  416 ?        I<     0:00 [xprtiod]
+  420 ?        I<     0:00 [rdma_cm]
+  425 ?        Ss     0:00 /sbin/lvmetad -f
+  431 ?        S<     0:00 [loop0]
+  432 ?        S<     0:00 [loop1]
+  437 ?        S<     0:23 [loop3]
+  630 ?        I<     0:00 [xfsalloc]
+  632 ?        I<     0:00 [xfs_mru_cache]
+  634 ?        I<     0:00 [xfs-buf/vdc1]
+  635 ?        I<     0:00 [xfs-buf/vdb1]
+  640 ?        I<     0:00 [xfs-data/vdb1]
+  641 ?        I<     0:00 [xfs-data/vdc1]
+  642 ?        I<     0:00 [xfs-conv/vdc1]
+  643 ?        I<     0:00 [xfs-cil/vdc1]
+  644 ?        I<     0:00 [xfs-conv/vdb1]
+  645 ?        I<     0:00 [xfs-reclaim/vdc]
+  646 ?        I<     0:00 [xfs-cil/vdb1]
+  647 ?        I<     0:00 [xfs-log/vdc1]
+  648 ?        I<     0:00 [xfs-reclaim/vdb]
+  649 ?        I<     0:00 [xfs-eofblocks/v]
+  650 ?        I<     0:00 [xfs-log/vdb1]
+  651 ?        I<     0:00 [xfs-eofblocks/v]
+  652 ?        S      0:00 [xfsaild/vdc1]
+  653 ?        S      0:05 [xfsaild/vdb1]
+  841 ?        Ss     0:01 /sbin/rpcbind -f -w
+  877 ?        Ssl    1:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 1124 ?        Ss     0:00 /usr/sbin/atd -f
+ 1126 ?        Ssl    0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+ 1136 ?        Ss     0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+ 1203 ?        Ssl    0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+ 1214 ?        Ssl    0:01 /usr/bin/lxcfs /var/lib/lxcfs/
+ 1248 ?        Ssl    0:02 /usr/sbin/rsyslogd -n
+ 1268 ?        Ssl    0:23 /usr/sbin/irqbalance --foreground
+ 1269 ?        Ssl    0:15 /usr/lib/accountsservice/accounts-daemon
+ 1305 ?        Ssl    1:22 /usr/bin/containerd
+ 1371 ?        Ssl    0:00 /usr/lib/policykit-1/polkitd --no-debug
+ 1405 ?        Ss     0:00 /usr/sbin/sshd -D
+ 2063 tty1     Ss+    0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+ 3150 ?        Ss     0:00 sshd: thaim [priv]
+ 3159 ?        Ss     0:01 /lib/systemd/systemd --user
+ 3168 ?        S      0:00 (sd-pam)
+ 3286 ?        S      0:23 sshd: thaim@pts/0
+ 3287 pts/0    Ss+    0:01 -bash
+ 3308 ?        Ss     0:00 sshd: thaim [priv]
+ 3419 ?        S      0:01 sshd: thaim@pts/4
+ 3420 pts/4    Ss+    0:01 -bash
+ 3955 pts/0    Sl     3:21 emacs
+ 4057 ?        Ssl   24:20 /home/thaim/bin/bingo
+ 4111 ?        Ssl   23:20 /home/thaim/bin/bingo
+ 5105 ?        Ss     0:00 sshd: thaim [priv]
+ 5211 ?        S      0:02 sshd: thaim@pts/1
+ 5212 pts/1    Ss+    0:02 -bash
+ 5848 ?        Ss     0:00 /usr/sbin/uuidd --socket-activation
+ 7020 ?        Ss     0:00 sshd: thaim [priv]
+ 7101 ?        S      0:01 sshd: thaim@pts/2
+ 7102 pts/2    Ss+    0:02 -bash
+ 9284 ?        S<     0:00 [loop4]
+ 9316 ?        Ssl    0:01 /usr/lib/snapd/snapd
+10982 ?        I      0:02 [kworker/0:1]
+11714 pts/3    S+     0:00 view serverless/notify.js
+12174 ?        Ss     0:00 sshd: thaim [priv]
+12283 ?        S      0:09 sshd: thaim@pts/3
+12284 pts/3    Ss     0:03 -bash
+12594 ?        I      0:00 [kworker/u4:2]
+12707 ?        I      0:00 [kworker/0:2]
+12860 ?        I      0:00 [kworker/u4:0]
+12943 ?        I      0:00 [kworker/u4:1]
+12956 ?        I      0:00 [kworker/0:0]
+13150 pts/5    S+     0:00 make -f script/Makefile eval
+13212 pts/5    S+     0:00 /bin/sh -c ./script/process.sh | tee log/process.log
+13213 pts/5    S+     0:00 /bin/bash ./script/process.sh
+13214 pts/5    S+     0:00 tee log/process.log
+13217 pts/5    R+     0:00 ps ax
+13607 ?        I      0:04 [kworker/1:3]
+13763 ?        Sl     0:01 containerd-shim -namespace moby -workdir /var/lib/containerd/io.containerd.runtime.v1.linux/moby/d74eb2e243dfc088732b1f8ccf951f45258f298f44d36dc912656bcbf5539be0 -address /run/containerd/containerd.sock -containerd-binary /usr/bin/containerd -runtime-root /var/run/docker/runtime-runc
+13795 ?        Ss     0:02 /usr/bin/tail -f /var/log/faillog
+15458 ?        I      0:00 [kworker/1:1]
+15481 ?        Ss     0:00 /lib/systemd/systemd-udevd
+15486 ?        Ssl    0:00 /lib/systemd/systemd-timesyncd
+15488 ?        Ss     0:00 /lib/systemd/systemd-logind
+15505 ?        Ss     0:12 /lib/systemd/systemd-networkd
+15530 ?        Ss     0:00 /lib/systemd/systemd-resolved
+16009 ?        Ss     0:00 sshd: thaim [priv]
+16113 ?        S      0:01 sshd: thaim@pts/5
+16114 pts/5    Ss     0:02 -bash
+30268 pts/3    Sl     0:00 spring server | spacely_web | started 48 hours ago
+30270 ?        Ssl    0:56 spring app    | spacely_web | started 48 hours ago | RAILS_ENV=staging mode
+30467 ?        Sl     0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 3306 -container-ip 172.21.0.2 -container-port 3306
+30474 ?        Sl     0:05 containerd-shim -namespace moby -workdir /var/lib/containerd/io.containerd.runtime.v1.linux/moby/12dd92559f4e272cfe6f47fbfa13a7c37e037a1122047cb46e4d37251e306f3a -address /run/containerd/containerd.sock -containerd-binary /usr/bin/containerd -runtime-root /var/run/docker/runtime-runc
+30493 ?        Ssl    1:08 mysqld
+30748 ?        Ssl    1:00 spring app    | spacely_web | started 48 hours ago | staging mode
+31934 ?        Ss     0:00 /usr/sbin/cron -f
+
+check idle process with sar
+Linux 4.15.0-99-generic (wnode02) 	06/03/20 	_x86_64_	(2 CPU)
+
+22:04:51        CPU     %user     %nice   %system   %iowait    %steal     %idle
+22:04:52        all      0.00      0.00      0.00      0.00      0.00    100.00
+22:04:52          0      0.00      0.00      0.00      0.00      0.00    100.00
+22:04:52          1      0.00      0.00      0.00      0.00      0.00    100.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all      0.00      0.00      0.00      0.00      0.00    100.00
+Average:          0      0.00      0.00      0.00      0.00      0.00    100.00
+Average:          1      0.00      0.00      0.00      0.00      0.00    100.00
+
+check heavy process with sar
+Linux 4.15.0-99-generic (wnode02) 	06/03/20 	_x86_64_	(2 CPU)
+
+22:04:52        CPU     %user     %nice   %system   %iowait    %steal     %idle
+22:04:53        all     50.00      0.00      0.00      0.00      0.00     50.00
+22:04:53          0     99.00      0.00      1.00      0.00      0.00      0.00
+22:04:53          1      0.00      0.00      0.00      0.00      0.00    100.00
+
+Average:        CPU     %user     %nice   %system   %iowait    %steal     %idle
+Average:        all     50.00      0.00      0.00      0.00      0.00     50.00
+Average:          0     99.00      0.00      1.00      0.00      0.00      0.00
+Average:          1      0.00      0.00      0.00      0.00      0.00    100.00
+
+check run queue length with sar (no other tasks)
+Linux 4.15.0-99-generic (wnode02) 	06/03/20 	_x86_64_	(2 CPU)
+
+22:04:53      runq-sz  plist-sz   ldavg-1   ldavg-5  ldavg-15   blocked
+22:04:54            0       335      0.08      0.02      0.01         0
+Average:            0       335      0.08      0.02      0.01         0
+
+check run queue length with sar (exist loop task)
+Linux 4.15.0-99-generic (wnode02) 	06/03/20 	_x86_64_	(2 CPU)
+
+22:04:54      runq-sz  plist-sz   ldavg-1   ldavg-5  ldavg-15   blocked
+22:04:55            1       336      0.15      0.03      0.01         0
+Average:            1       336      0.15      0.03      0.01         0
+Linux 4.15.0-99-generic (wnode02) 	06/03/20 	_x86_64_	(2 CPU)
+
+22:04:55      runq-sz  plist-sz   ldavg-1   ldavg-5  ldavg-15   blocked
+22:04:56            2       337      0.15      0.03      0.01         0
+Average:            2       337      0.15      0.03      0.01         0
