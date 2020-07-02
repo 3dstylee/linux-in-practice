@@ -6,6 +6,7 @@
 
 #define BUFFER_SIZE 1000
 #define ALLOC_SIZE (100*1024*1024)
+// #define ALLOC_SIZE 32
 
 static char command[BUFFER_SIZE];
 
