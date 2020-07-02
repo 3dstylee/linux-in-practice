@@ -1,0 +1,333 @@
+mmapの動作検証
+*** memory map before memory allocation ***
+00010000-00011000 r-xp 00000000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00020000-00021000 r--p 00000000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00021000-00022000 rw-p 00001000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00372000-00393000 rw-p 00000000 00:00 0          [heap]
+b6db7000-b6eef000 r-xp 00000000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6eef000-b6eff000 ---p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6eff000-b6f01000 r--p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f01000-b6f02000 rw-p 0013a000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f02000-b6f05000 rw-p 00000000 00:00 0 
+b6f19000-b6f1d000 r-xp 00000000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f1d000-b6f2c000 ---p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2c000-b6f2d000 r--p 00003000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2d000-b6f2e000 rw-p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2e000-b6f4e000 r-xp 00000000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6f5c000-b6f5e000 rw-p 00000000 00:00 0 
+b6f5e000-b6f5f000 r--p 00020000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6f5f000-b6f60000 rw-p 00021000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+beb93000-bebb4000 rw-p 00000000 00:00 0          [stack]
+beeab000-beeac000 r-xp 00000000 00:00 0          [sigpage]
+beeac000-beead000 r--p 00000000 00:00 0          [vvar]
+beead000-beeae000 r-xp 00000000 00:00 0          [vdso]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+
+*** succeeded to allocate memory: address = 0xb6f5b000; size = 0x20 ***
+
+*** memory map after memory allocation ***
+00010000-00011000 r-xp 00000000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00020000-00021000 r--p 00000000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00021000-00022000 rw-p 00001000 b3:02 256363     /home/pi/src/linux-in-practice/05-memory-management/mmap
+00372000-00393000 rw-p 00000000 00:00 0          [heap]
+b6db7000-b6eef000 r-xp 00000000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6eef000-b6eff000 ---p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6eff000-b6f01000 r--p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f01000-b6f02000 rw-p 0013a000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f02000-b6f05000 rw-p 00000000 00:00 0 
+b6f19000-b6f1d000 r-xp 00000000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f1d000-b6f2c000 ---p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2c000-b6f2d000 r--p 00003000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2d000-b6f2e000 rw-p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f2e000-b6f4e000 r-xp 00000000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6f5b000-b6f5e000 rw-p 00000000 00:00 0 
+b6f5e000-b6f5f000 r--p 00020000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6f5f000-b6f60000 rw-p 00021000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+beb93000-bebb4000 rw-p 00000000 00:00 0          [stack]
+beeab000-beeac000 r-xp 00000000 00:00 0          [sigpage]
+beeac000-beead000 r--p 00000000 00:00 0          [vvar]
+beead000-beeae000 r-xp 00000000 00:00 0          [vdso]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+
+mallocの動作検証
+*** memory map before malloc memory allocation ***
+00010000-00011000 r-xp 00000000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+00020000-00021000 r--p 00000000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+00021000-00022000 rw-p 00001000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+0086a000-0088b000 rw-p 00000000 00:00 0          [heap]
+b6e37000-b6f6f000 r-xp 00000000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f6f000-b6f7f000 ---p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f7f000-b6f81000 r--p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f81000-b6f82000 rw-p 0013a000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f82000-b6f85000 rw-p 00000000 00:00 0 
+b6f99000-b6f9d000 r-xp 00000000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f9d000-b6fac000 ---p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fac000-b6fad000 r--p 00003000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fad000-b6fae000 rw-p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fae000-b6fce000 r-xp 00000000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6fdc000-b6fde000 rw-p 00000000 00:00 0 
+b6fde000-b6fdf000 r--p 00020000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6fdf000-b6fe0000 rw-p 00021000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+bee32000-bee53000 rw-p 00000000 00:00 0          [stack]
+bee9d000-bee9e000 r-xp 00000000 00:00 0          [sigpage]
+bee9e000-bee9f000 r--p 00000000 00:00 0          [vvar]
+bee9f000-beea0000 r-xp 00000000 00:00 0          [vdso]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+
+*** succeeded to allocate memory: address = 0x86b158; size = 0x20 ***
+
+*** memory map after malloc memory allocation ***
+00010000-00011000 r-xp 00000000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+00020000-00021000 r--p 00000000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+00021000-00022000 rw-p 00001000 b3:02 256587     /home/pi/src/linux-in-practice/05-memory-management/malloc
+0086a000-0088b000 rw-p 00000000 00:00 0          [heap]
+b6e37000-b6f6f000 r-xp 00000000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f6f000-b6f7f000 ---p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f7f000-b6f81000 r--p 00138000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f81000-b6f82000 rw-p 0013a000 b3:02 2018       /lib/arm-linux-gnueabihf/libc-2.28.so
+b6f82000-b6f85000 rw-p 00000000 00:00 0 
+b6f99000-b6f9d000 r-xp 00000000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6f9d000-b6fac000 ---p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fac000-b6fad000 r--p 00003000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fad000-b6fae000 rw-p 00004000 b3:02 132105     /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+b6fae000-b6fce000 r-xp 00000000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6fdc000-b6fde000 rw-p 00000000 00:00 0 
+b6fde000-b6fdf000 r--p 00020000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+b6fdf000-b6fe0000 rw-p 00021000 b3:02 1940       /lib/arm-linux-gnueabihf/ld-2.28.so
+bee32000-bee53000 rw-p 00000000 00:00 0          [stack]
+bee9d000-bee9e000 r-xp 00000000 00:00 0          [sigpage]
+bee9e000-bee9f000 r--p 00000000 00:00 0          [vvar]
+bee9f000-beea0000 r-xp 00000000 00:00 0          [vdso]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+
+mmapのstrace
+execve("./mmap", ["./mmap"], 0xbea34500 /* 39 vars */) = 0
+brk(NULL)                               = 0x361000
+uname({sysname="Linux", nodename="raspberrypi", ...}) = 0
+mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6f52000
+access("/etc/ld.so.preload", R_OK)      = 0
+openat(AT_FDCWD, "/etc/ld.so.preload", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=54, ...}) = 0
+mmap2(NULL, 54, PROT_READ|PROT_WRITE, MAP_PRIVATE, 3, 0) = 0xb6f51000
+close(3)                                = 0
+readlink("/proc/self/exe", "/home/pi/src/linux-in-practice/0"..., 4096) = 56
+openat(AT_FDCWD, "/usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\254\3\0\0004\0\0\0"..., 512) = 512
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+fstat64(3, {st_mode=S_IFREG|0644, st_size=17708, ...}) = 0
+mmap2(NULL, 81964, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6f0f000
+mprotect(0xb6f13000, 61440, PROT_NONE)  = 0
+mmap2(0xb6f22000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0xb6f22000
+close(3)                                = 0
+munmap(0xb6f51000, 54)                  = 0
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=79443, ...}) = 0
+mmap2(NULL, 79443, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb6efb000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/arm-linux-gnueabihf/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\300x\1\0004\0\0\0"..., 512) = 512
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1296004, ...}) = 0
+mmap2(NULL, 1364764, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6dad000
+mprotect(0xb6ee5000, 65536, PROT_NONE)  = 0
+mmap2(0xb6ef5000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x138000) = 0xb6ef5000
+mmap2(0xb6ef8000, 8988, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb6ef8000
+close(3)                                = 0
+set_tls(0xb6f53180)                     = 0
+mprotect(0xb6ef5000, 8192, PROT_READ)   = 0
+mprotect(0xb6f22000, 4096, PROT_READ)   = 0
+mprotect(0x20000, 4096, PROT_READ)      = 0
+mprotect(0xb6f54000, 4096, PROT_READ)   = 0
+munmap(0xb6efb000, 79443)               = 0
+getpid()                                = 16376
+fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x1), ...}) = 0
+brk(NULL)                               = 0x361000
+brk(0x382000)                           = 0x382000
+write(1, "*** memory map before memory all"..., 44) = 44
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0xbee3f24c) = 16377
+wait4(16377, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 16377
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16377, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+mmap2(NULL, 32, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6f51000
+write(1, "\n", 1)                       = 1
+write(1, "*** succeeded to allocate memory"..., 72) = 72
+write(1, "\n", 1)                       = 1
+write(1, "*** memory map after memory allo"..., 43) = 43
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0xbee3f24c) = 16379
+wait4(16379, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 16379
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6dda120}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16379, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+munmap(0xb6f51000, 32)                  = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+
+mallocのstrace
+execve("./malloc", ["./malloc"], 0xbe946500 /* 39 vars */) = 0
+brk(NULL)                               = 0x1525000
+uname({sysname="Linux", nodename="raspberrypi", ...}) = 0
+mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6f9c000
+access("/etc/ld.so.preload", R_OK)      = 0
+openat(AT_FDCWD, "/etc/ld.so.preload", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=54, ...}) = 0
+mmap2(NULL, 54, PROT_READ|PROT_WRITE, MAP_PRIVATE, 3, 0) = 0xb6f9b000
+close(3)                                = 0
+readlink("/proc/self/exe", "/home/pi/src/linux-in-practice/0"..., 4096) = 58
+openat(AT_FDCWD, "/usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\254\3\0\0004\0\0\0"..., 512) = 512
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+_llseek(3, 16748, [16748], SEEK_SET)    = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 960) = 960
+_llseek(3, 16424, [16424], SEEK_SET)    = 0
+read(3, "A,\0\0\0aeabi\0\1\"\0\0\0\0056\0\6\6\10\1\t\2\n\3\f\1\22\4\24"..., 45) = 45
+fstat64(3, {st_mode=S_IFREG|0644, st_size=17708, ...}) = 0
+mmap2(NULL, 81964, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6f59000
+mprotect(0xb6f5d000, 61440, PROT_NONE)  = 0
+mmap2(0xb6f6c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0xb6f6c000
+close(3)                                = 0
+munmap(0xb6f9b000, 54)                  = 0
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=79443, ...}) = 0
+mmap2(NULL, 79443, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb6f45000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/arm-linux-gnueabihf/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\300x\1\0004\0\0\0"..., 512) = 512
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+_llseek(3, 1293204, [1293204], SEEK_SET) = 0
+read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 2800) = 2800
+_llseek(3, 1289788, [1289788], SEEK_SET) = 0
+read(3, "A.\0\0\0aeabi\0\1$\0\0\0\0056\0\6\6\10\1\t\1\n\2\22\4\23\1\24"..., 47) = 47
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1296004, ...}) = 0
+mmap2(NULL, 1364764, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6df7000
+mprotect(0xb6f2f000, 65536, PROT_NONE)  = 0
+mmap2(0xb6f3f000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x138000) = 0xb6f3f000
+mmap2(0xb6f42000, 8988, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb6f42000
+close(3)                                = 0
+set_tls(0xb6f9d180)                     = 0
+mprotect(0xb6f3f000, 8192, PROT_READ)   = 0
+mprotect(0xb6f6c000, 4096, PROT_READ)   = 0
+mprotect(0x20000, 4096, PROT_READ)      = 0
+mprotect(0xb6f9e000, 4096, PROT_READ)   = 0
+munmap(0xb6f45000, 79443)               = 0
+getpid()                                = 16386
+fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x1), ...}) = 0
+brk(NULL)                               = 0x1525000
+brk(0x1546000)                          = 0x1546000
+write(1, "*** memory map before malloc mem"..., 51) = 51
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0xbec2a254) = 16387
+wait4(16387, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 16387
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16387, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+write(1, "\n", 1)                       = 1
+write(1, "*** succeeded to allocate memory"..., 71) = 71
+write(1, "\n", 1)                       = 1
+write(1, "*** memory map after malloc memo"..., 50) = 50
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0xbec2a254) = 16389
+wait4(16389, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 16389
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6e24120}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16389, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+exit_group(0)                           = ?
++++ exited with 0 +++
