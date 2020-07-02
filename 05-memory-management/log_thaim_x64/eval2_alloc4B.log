@@ -1,0 +1,196 @@
+mmapの動作検証
+*** memory map before memory allocation ***
+55659f920000-55659f921000 r-xp 00000000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+55659fb20000-55659fb21000 r--p 00000000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+55659fb21000-55659fb22000 rw-p 00001000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+5565a0c27000-5565a0c48000 rw-p 00000000 00:00 0                          [heap]
+7f909b07d000-7f909b264000 r-xp 00000000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b264000-7f909b464000 ---p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b464000-7f909b468000 r--p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b468000-7f909b46a000 rw-p 001eb000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b46a000-7f909b46e000 rw-p 00000000 00:00 0 
+7f909b46e000-7f909b495000 r-xp 00000000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b687000-7f909b689000 rw-p 00000000 00:00 0 
+7f909b695000-7f909b696000 r--p 00027000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b696000-7f909b697000 rw-p 00028000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b697000-7f909b698000 rw-p 00000000 00:00 0 
+7ffd21206000-7ffd21227000 rw-p 00000000 00:00 0                          [stack]
+7ffd2129e000-7ffd212a1000 r--p 00000000 00:00 0                          [vvar]
+7ffd212a1000-7ffd212a3000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+*** succeeded to allocate memory: address = 0x7f909b694000; size = 0x20 ***
+
+*** memory map after memory allocation ***
+55659f920000-55659f921000 r-xp 00000000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+55659fb20000-55659fb21000 r--p 00000000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+55659fb21000-55659fb22000 rw-p 00001000 fc:11 276807890                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/mmap
+5565a0c27000-5565a0c48000 rw-p 00000000 00:00 0                          [heap]
+7f909b07d000-7f909b264000 r-xp 00000000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b264000-7f909b464000 ---p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b464000-7f909b468000 r--p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b468000-7f909b46a000 rw-p 001eb000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f909b46a000-7f909b46e000 rw-p 00000000 00:00 0 
+7f909b46e000-7f909b495000 r-xp 00000000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b687000-7f909b689000 rw-p 00000000 00:00 0 
+7f909b694000-7f909b695000 rw-p 00000000 00:00 0 
+7f909b695000-7f909b696000 r--p 00027000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b696000-7f909b697000 rw-p 00028000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f909b697000-7f909b698000 rw-p 00000000 00:00 0 
+7ffd21206000-7ffd21227000 rw-p 00000000 00:00 0                          [stack]
+7ffd2129e000-7ffd212a1000 r--p 00000000 00:00 0                          [vvar]
+7ffd212a1000-7ffd212a3000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+mallocの動作検証
+*** memory map before malloc memory allocation ***
+5612174f2000-5612174f3000 r-xp 00000000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+5612176f2000-5612176f3000 r--p 00000000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+5612176f3000-5612176f4000 rw-p 00001000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+56121944d000-56121946e000 rw-p 00000000 00:00 0                          [heap]
+7f8650180000-7f8650367000 r-xp 00000000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f8650367000-7f8650567000 ---p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f8650567000-7f865056b000 r--p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f865056b000-7f865056d000 rw-p 001eb000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f865056d000-7f8650571000 rw-p 00000000 00:00 0 
+7f8650571000-7f8650598000 r-xp 00000000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f865078a000-7f865078c000 rw-p 00000000 00:00 0 
+7f8650798000-7f8650799000 r--p 00027000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f8650799000-7f865079a000 rw-p 00028000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f865079a000-7f865079b000 rw-p 00000000 00:00 0 
+7ffdf1658000-7ffdf1679000 rw-p 00000000 00:00 0                          [stack]
+7ffdf16e9000-7ffdf16ec000 r--p 00000000 00:00 0                          [vvar]
+7ffdf16ec000-7ffdf16ee000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+*** succeeded to allocate memory: address = 0x56121944e270; size = 0x20 ***
+
+*** memory map after malloc memory allocation ***
+5612174f2000-5612174f3000 r-xp 00000000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+5612176f2000-5612176f3000 r--p 00000000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+5612176f3000-5612176f4000 rw-p 00001000 fc:11 274767937                  /home/thaim/src/github.com/3dstylee/linux-in-practice/05-memory-management/malloc
+56121944d000-56121946e000 rw-p 00000000 00:00 0                          [heap]
+7f8650180000-7f8650367000 r-xp 00000000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f8650367000-7f8650567000 ---p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f8650567000-7f865056b000 r--p 001e7000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f865056b000-7f865056d000 rw-p 001eb000 fc:02 398784                     /lib/x86_64-linux-gnu/libc-2.27.so
+7f865056d000-7f8650571000 rw-p 00000000 00:00 0 
+7f8650571000-7f8650598000 r-xp 00000000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f865078a000-7f865078c000 rw-p 00000000 00:00 0 
+7f8650798000-7f8650799000 r--p 00027000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f8650799000-7f865079a000 rw-p 00028000 fc:02 398772                     /lib/x86_64-linux-gnu/ld-2.27.so
+7f865079a000-7f865079b000 rw-p 00000000 00:00 0 
+7ffdf1658000-7ffdf1679000 rw-p 00000000 00:00 0                          [stack]
+7ffdf16e9000-7ffdf16ec000 r--p 00000000 00:00 0                          [vvar]
+7ffdf16ec000-7ffdf16ee000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+mmapのstrace
+execve("./mmap", ["./mmap"], 0x7ffdf7536310 /* 44 vars */) = 0
+brk(NULL)                               = 0x55c946ff3000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48227, ...}) = 0
+mmap(NULL, 48227, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0412ab2000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0412ab0000
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f04124a6000
+mprotect(0x7f041268d000, 2097152, PROT_NONE) = 0
+mmap(0x7f041288d000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f041288d000
+mmap(0x7f0412893000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0412893000
+close(3)                                = 0
+arch_prctl(ARCH_SET_FS, 0x7f0412ab14c0) = 0
+mprotect(0x7f041288d000, 16384, PROT_READ) = 0
+mprotect(0x55c9456af000, 4096, PROT_READ) = 0
+mprotect(0x7f0412abe000, 4096, PROT_READ) = 0
+munmap(0x7f0412ab2000, 48227)           = 0
+getpid()                                = 22390
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+brk(NULL)                               = 0x55c946ff3000
+brk(0x55c947014000)                     = 0x55c947014000
+write(1, "*** memory map before memory all"..., 44) = 44
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0x7fff2be48cac) = 22391
+wait4(22391, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 22391
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=22391, si_uid=1001, si_status=0, si_utime=0, si_stime=0} ---
+mmap(NULL, 32, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0412abd000
+write(1, "\n", 1)                       = 1
+write(1, "*** succeeded to allocate memory"..., 76) = 76
+write(1, "\n", 1)                       = 1
+write(1, "*** memory map after memory allo"..., 43) = 43
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0x7fff2be48cac) = 22393
+wait4(22393, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 22393
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7f04124e4f20}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=22393, si_uid=1001, si_status=0, si_utime=0, si_stime=0} ---
+munmap(0x7f0412abd000, 32)              = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+
+mallocのstrace
+execve("./malloc", ["./malloc"], 0x7ffeddeb07f0 /* 44 vars */) = 0
+brk(NULL)                               = 0x55d2864d9000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48227, ...}) = 0
+mmap(NULL, 48227, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fdcd95cc000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fdcd95ca000
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fdcd8fc0000
+mprotect(0x7fdcd91a7000, 2097152, PROT_NONE) = 0
+mmap(0x7fdcd93a7000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7fdcd93a7000
+mmap(0x7fdcd93ad000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fdcd93ad000
+close(3)                                = 0
+arch_prctl(ARCH_SET_FS, 0x7fdcd95cb4c0) = 0
+mprotect(0x7fdcd93a7000, 16384, PROT_READ) = 0
+mprotect(0x55d284878000, 4096, PROT_READ) = 0
+mprotect(0x7fdcd95d8000, 4096, PROT_READ) = 0
+munmap(0x7fdcd95cc000, 48227)           = 0
+getpid()                                = 22399
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+brk(NULL)                               = 0x55d2864d9000
+brk(0x55d2864fa000)                     = 0x55d2864fa000
+write(1, "*** memory map before malloc mem"..., 51) = 51
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0x7ffe2ad273ac) = 22400
+wait4(22400, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 22400
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=22400, si_uid=1001, si_status=0, si_utime=0, si_stime=0} ---
+write(1, "\n", 1)                       = 1
+write(1, "*** succeeded to allocate memory"..., 76) = 76
+write(1, "\n", 1)                       = 1
+write(1, "*** memory map after malloc memo"..., 50) = 50
+rt_sigaction(SIGINT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+clone(child_stack=NULL, flags=CLONE_PARENT_SETTID|SIGCHLD, parent_tidptr=0x7ffe2ad273ac) = 22402
+wait4(22402, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 22402
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fdcd8ffef20}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=22402, si_uid=1001, si_status=0, si_utime=0, si_stime=0} ---
+exit_group(0)                           = ?
++++ exited with 0 +++
