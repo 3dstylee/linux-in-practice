@@ -9,9 +9,11 @@ help: ## show this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {sub("\\\\n",sprintf("\n%22c"," "), $$2);printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 build: ## build binary package
-	$(CC) -o segv       segv.c
+	$(CC) -o segv		segv.c
 	$(CC) -o mmap		mmap.c
-	$(CC) -o malloc 	malloc.c
+	$(CC) -o malloc		malloc.c
+	$(CC) -o filemap	filemap.c
+	$(CC) -o fopenclose	fopenclose.c
 
 eval1: build ## eval page fault
 	mkdir -p log
@@ -40,9 +42,27 @@ eval2: build ## eval memory allocation
 	strace ./malloc      2>> log/eval2.log
 
 eval3: build ## eval filemap/demand paging
+	mkdir -p log
+
+	echo -n "filemap動作検証\n" > log/eval3.log
+	echo hello >testfile
+	./filemap                >> log/eval3.log
+
+	echo -n "\nfopenclose動作検証\n" >> log/eval3.log
+	echo hello >testfile
+	./fopenclose                  >> log/eval3.log
+
+	echo -n "\nfilemapのstrace\n"   >> log/eval3.log
+	echo hello >testfile
+	strace ./filemap             2>> log/eval3.log
+
+# refs: https://www.atmarkit.co.jp/ait/articles/1202/21/news133.html
+	echo -n "\nfopencloseのstrace\n" >> log/eval3.log
+	echo hello >testfile
+	strace ./fopenclose           2>> log/eval3.log
 
 eval4: build ## eval cow/swap/...
 
 clean: ## remove generated files
 	-@rm -f *~
-	-@rm -f segv mmap mmap_heap mmap_pagemap mmap_sleep malloc
+	-@rm -f segv mmap mmap_heap mmap_pagemap mmap_sleep malloc filemap fopenclose testfile
