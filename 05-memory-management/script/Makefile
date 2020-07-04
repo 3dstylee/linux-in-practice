@@ -14,6 +14,8 @@ build: ## build binary package
 	$(CC) -o malloc		malloc.c
 	$(CC) -o filemap	filemap.c
 	$(CC) -o fopenclose	fopenclose.c
+	$(CC) -o demand-paging		demand-paging.c
+	$(CC) -o demand-paging-all	demand-paging-all.c
 
 eval1: build ## eval page fault
 	mkdir -p log
@@ -54,15 +56,18 @@ eval3: build ## eval filemap/demand paging
 
 	echo -n "\nfilemapのstrace\n"   >> log/eval3.log
 	echo hello >testfile
-	strace ./filemap             2>> log/eval3.log
+	strace ./filemap             2>> log/eval3.log >/dev/null
 
 # refs: https://www.atmarkit.co.jp/ait/articles/1202/21/news133.html
 	echo -n "\nfopencloseのstrace\n" >> log/eval3.log
 	echo hello >testfile
-	strace ./fopenclose           2>> log/eval3.log
+	strace ./fopenclose           2>> log/eval3.log >/dev/null
+
+eval34:
+	bash ./script/eval_demand_paging.sh | tee -a log/eval3.log
 
 eval4: build ## eval cow/swap/...
 
 clean: ## remove generated files
 	-@rm -f *~
-	-@rm -f segv mmap mmap_heap mmap_pagemap mmap_sleep malloc filemap fopenclose testfile
+	-@rm -f segv mmap mmap_heap mmap_pagemap mmap_sleep malloc filemap fopenclose testfile demand-paging demand-paging-all
